@@ -1,37 +1,72 @@
 <?php include("partials/menu.php"); ?>
 
-<h1 style="margin-left: 1%;">Manage Food</h1>
+<h1 style="margin-left: 1%;">Manage Foods</h1>
+<div style="text-align:center;">
+  <?php
+    if(isset($_SESSION['category']))
+    {
+      echo''.$_SESSION['category'].'';
+      unset($_SESSION['category']);
+    }
+    if(isset($_SESSION['delete']))
+    {
+      echo''.$_SESSION['delete'].'';
+      unset($_SESSION['delete']);
+    }
+  ?>
+</div>
 
-<table class="table table-success table-striped">
+<table class="table table-success table-striped"style="margin: 1%;width: 98%;">
+<a href="add-food.php" target="_self">
 <button type="button" class="btn btn-primary"style="margin-left: 1%;" >Add Food</button>
   <thead >
     <tr>
-      <th scope="col">Food_ID</th>
-      <th scope="col">Name</th>
+      <th scope="col">S.N.</th>
+      <th scope="col">Food Name</th>
       <th scope="col">Category</th>
+      <th scope="col">Cost</th>
+      <th scope="col">Description</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
   <?php
-            // Sample data, you'd typically fetch this from a database
-            $users = [
-                ['username' => 'user1', 'password' => 'password123','role' => 'Food',],
-                ['username' => 'user2', 'password' => 'password456','role' => 'Food',]
-            ];
+            $sql = "SELECT * FROM category 
+                    INNER JOIN food ON
+                    category.ca_id = food.ca_id";
+            $res = mysqli_query($conn,$sql);
+            $id=1;
 
-            foreach ($users as $user) {
-                echo "<tr>";
-                echo "<td>{$user['username']}</td>";
-                echo "<td>" . str_repeat('*', strlen($user['password'])) . "</td>"; // Hide the password
-                echo "<td>{$user['role']}</td>";
-                ?>
-                <td><button type="button" class="btn btn-success" >Update Food</button>
-                <button type="button" class="btn btn-danger" >Delete Food</button>
-                </td>
+            if($res==TRUE)
+            {
+              $count = mysqli_num_rows($res);
+              if($count> 0)
+              {
+                while($row = mysqli_fetch_array($res))
+                {
+                  $food_id = $row["food_id"];
+                  $foodname = $row["foodname"];
+                  $category =$row["category"];
+                  $cost = $row["cost"];
+                  $description = $row["description"];
+                  ?>
+                <tr> 
+                  <td><?php echo $id++;?>.</td>
+                  <td><?php echo $foodname;?></td>
+                  <td><?php echo $category;?></td>
+                  <td>Rs. <?php echo $cost;?></td>
+                  <td><?php echo $description;?></td>
+                  <td><button type="button" class="btn btn-success" >Update Food</button>
+                  <a href="<?php echo SITEURL; ?>admin/delete-food.php?food_id=<?php echo $food_id; ?>" target="_self">
+                      <button type="button" class="btn btn-danger" >Delete Food</button>
+                  </td>
+                </tr>
                 <?php
-                echo "</tr>";
             }
+          }else{
+
+          }
+          }
         ?>
   </tbody>
 </table>

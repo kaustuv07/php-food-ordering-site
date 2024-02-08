@@ -11,10 +11,6 @@
 </div>
 <form action = "" method="POST">
   <div class="mb-3"style="max-width: 300px;margin-left: 5%;">
-    <label for="c_id" class="form-label">Category_Id</label>
-    <input type="text" class="form-control" id="c_id" name="c_id" placeholder="Enter category id" required>
-  </div>
-  <div class="mb-3"style="max-width: 300px;margin-left: 5%;">
     <label for="category" class="form-label">Category Type</label>
     <input type="text" class="form-control" id="category" name="category"placeholder="Enter category type" required>
   </div>
@@ -26,11 +22,9 @@
 <?php 
     if(isset($_POST["submit"]))
     {
-        $ca_id=$_POST["ca_id"];
         $category=$_POST["category"];
 
         $sql = "INSERT INTO category SET
-                ca_id='$ca_id',
                 category='$category'
                 ";
         

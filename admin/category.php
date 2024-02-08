@@ -22,7 +22,6 @@
   <thead >
     <tr>
       <th scope="col">S.N.</th>
-      <th scope="col">Category_id</th>
       <th scope="col">Category Types</th>
       <th scope="col">Actions</th>
     </tr>
@@ -45,7 +44,6 @@
                   ?>
                 <tr> 
                   <td><?php echo $id++;?>.</td>
-                  <td><?php echo $ca_id?></td>
                   <td><?php echo $category;?></td>
                   <td><button type="button" class="btn btn-success" >Update Category</button>
                   <a href="<?php echo SITEURL; ?>admin/delete-category.php?ca_id=<?php echo $ca_id; ?>" target="_self">
