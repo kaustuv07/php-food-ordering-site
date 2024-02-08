@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="./css/login.css" />
+    <link rel="stylesheet" href="../css/login.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin-Log-In-SnackPack</title>
   </head>
@@ -51,7 +51,6 @@
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
-    <script src = "javascript/loginscript.js"></script>
   </body>
 </html>
 
