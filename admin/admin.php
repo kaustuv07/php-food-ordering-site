@@ -8,6 +8,11 @@
       echo''.$_SESSION['add'].'';
       unset($_SESSION['add']);
     }
+    if(isset($_SESSION['delete']))
+    {
+      echo''.$_SESSION['delete'].'';
+      unset($_SESSION['delete']);
+    }
   ?>
 </div>
 
@@ -46,6 +51,7 @@
                   <td><?php echo $password;?></td>
                   <td><?php echo $role;?></td>
                   <td><button type="button" class="btn btn-success" >Update Admin</button>
+                  <a href="<?php echo SITEURL; ?>admin/delete-admin.php?username=<?php echo $username; ?>" target="_self">
                       <button type="button" class="btn btn-danger" >Delete Admin</button>
                   </td>
                 </tr>

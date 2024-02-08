@@ -61,7 +61,7 @@
         $username = $_POST['username'];
         $password = md5($_POST['password']);
 
-        $sql = "SELECT * FROM logintable WHERE username='$username'AND password='$password'";
+        $sql = "SELECT * FROM logintable WHERE username='$username'AND password='$password'AND roles = 'admin'";
         $res = mysqli_query($conn, $sql);
         if (!$res) {
             die("Query failed: " . mysqli_error($conn));

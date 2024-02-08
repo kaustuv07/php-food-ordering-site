@@ -5,7 +5,7 @@
     {
         $ca_id = $_GET['ca_id'];
 
-        $sql = "DELETE FROM category WHERE ca_id=$ca_id";
+        $sql = "DELETE FROM category WHERE ca_id='$ca_id'";
         try{
 
         $res = mysqli_query($conn,$sql);

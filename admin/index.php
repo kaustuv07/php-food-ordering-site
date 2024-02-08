@@ -2,7 +2,7 @@
 
 <h1 class ="text-center">Dashboard</h1>
 <br>
-<div style="color:white;">
+<div style="color:white;text-align:center;">
 <?php
                 if(isset($_SESSION["login"]))
                 {
