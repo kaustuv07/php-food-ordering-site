@@ -252,7 +252,5 @@
         </div>
       </div>
     </section>
-    <!-- JS SCRIPT -->
-    <script src="javascript/welcomescript.js"></script>
   </body>
 </html>
