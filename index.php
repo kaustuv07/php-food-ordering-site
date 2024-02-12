@@ -1,18 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SnackPack</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <script
-      src="https://kit.fontawesome.com/91f7d28409.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <section class="top-page">
+<?php include("partials-frontend/menu.php"); ?>
+<section class="top-page">
       <div id="header">
         <div class="container">
           <nav>
@@ -27,7 +14,7 @@
               <li><a href="#home">Home</a></li>
               <li><a href="#about">About</a></li>
               <li><a href="#menu">Menu</a></li>
-              <li><a href="services.html">Services</a></li>
+              <li><a href="./services.php">Services</a></li>
               <li><a href="#contact">Contact</a></li>
               <li>
                 <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
@@ -66,7 +53,6 @@
         </form>
       </div>
     </section>
-
     <!-- Most Popular section -->
     <section class="menu" id="menu">
       <h1>&mdash; Most Popular &mdash;</h1>
@@ -216,41 +202,4 @@
         </div>
       </div>
     </section>
-    <!-- FOOTER SECTION -->
-    <section class="footer">
-      <div class="box-container">
-        <div class="box">
-          <h3>QUICK LINKS</h3>
-          <a href="#">Home</a>
-          <a href="#">About</a>
-          <a href="#">Menu</a>
-          <a href="#">Services</a>
-          <a href="#">Contact</a>
-        </div>
-        <div class="box">
-          <h3>CONTACT US</h3>
-          <a href="#"><i class="fa-solid fa-phone"></i> +977-9828932151</a>
-          <a href="#"><i class="fa-brands fa-viber"></i> +977-9841627899</a>
-          <a href="#"
-            ><i class="fa-solid fa-envelope"></i> snackpack@gmail.com</a
-          >
-          <a href="#"
-            ><i class="fa-solid fa-location-dot"></i> Putalisadak, Kathmandu,
-            Nepal</a
-          >
-        </div>
-        <div class="box">
-          <h3>FOLLOW US</h3>
-          <i class="fa-brands fa-facebook"></i>&nbsp
-          <i class="fa-brands fa-instagram"></i> &nbsp
-          <i class="fa-brands fa-twitter"></i> &nbsp
-          <i class="fa-brands fa-linkedin"></i> &nbsp
-          <i class="fa-brands fa-github"></i> &nbsp
-        </div>
-        <div class="credit">
-          <p>Copyright &#169; 2024 SnackPack, All Rights Reserved</p>
-        </div>
-      </div>
-    </section>
-  </body>
-</html>
+<?php include("partials-frontend/footer.php"); ?>
