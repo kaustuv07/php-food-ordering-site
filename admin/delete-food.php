@@ -1,10 +1,20 @@
 <?php 
     include("../config/constants.php");
 
-    if(isset($_GET["food_id"]))
+    if(isset($_GET["food_id"]) && isset($_GET['image_name']))
     {
         $food_id = $_GET['food_id'];
+        $image_name = $_GET['image_name'];
 
+        $path = "../css/images/food/".$image_name;
+        $remove = unlink($path);
+        if($remove==false)
+        {
+            $_SESSION['delete'] = "<div class='success'>Failed to Delete Remove Image File.</div>";
+            header('location:'.SITEURL.'admin/food.php');
+            die();
+        }
+        
         $sql = "DELETE FROM food WHERE food_id='$food_id'";
 
         try{

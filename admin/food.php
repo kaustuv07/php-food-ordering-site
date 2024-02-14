@@ -22,10 +22,13 @@
   <thead >
     <tr>
       <th scope="col">S.N.</th>
+      <th scope="col">Image</th>
       <th scope="col">Food Name</th>
       <th scope="col">Category</th>
       <th scope="col">Cost</th>
       <th scope="col">Description</th>
+      <th scope="col">Featured</th>
+      <th scope="col">Active</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -45,19 +48,25 @@
                 while($row = mysqli_fetch_array($res))
                 {
                   $food_id = $row["food_id"];
+                  $image_name=$row["image_name"];
                   $foodname = $row["foodname"];
                   $category =$row["category"];
                   $cost = $row["cost"];
                   $description = $row["description"];
+                  $featured= $row["featured"];
+                  $active= $row["active"];
                   ?>
                 <tr> 
                   <td><?php echo $id++;?>.</td>
+                  <td><img src="<?php echo SITEURL;?>css/images/food/<?php echo $image_name;?>" width="50px"></td>
                   <td><?php echo $foodname;?></td>
                   <td><?php echo $category;?></td>
                   <td>Rs. <?php echo $cost;?></td>
                   <td><?php echo $description;?></td>
+                  <td><?php echo $featured;?></td>
+                  <td><?php echo $active;?></td>
                   <td><button type="button" class="btn btn-success" >Update Food</button>
-                  <a href="<?php echo SITEURL; ?>admin/delete-food.php?food_id=<?php echo $food_id; ?>" target="_self">
+                  <a href="<?php echo SITEURL; ?>admin/delete-food.php?food_id=<?php echo $food_id; ?>&image_name=<?php echo $image_name; ?>" target="_self">
                       <button type="button" class="btn btn-danger" >Delete Food</button>
                   </td>
                 </tr>

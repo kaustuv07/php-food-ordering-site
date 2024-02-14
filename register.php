@@ -1,4 +1,4 @@
-<?php include("../config/constants.php"); ?>
+<?php include("config/constants.php"); ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -43,7 +43,7 @@
           <button>Register</button>
 
           <div class="login">
-            <p>Already have an account?<a href="login.html"> Sign In</a></p>
+            <p>Already have an account?<a href="login.php"> Sign In</a></p>
           </div>
         </form>
       </div>

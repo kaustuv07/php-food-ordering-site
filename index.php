@@ -1,3 +1,4 @@
+<?php include("config/constants.php"); ?>
 <?php include("partials-frontend/menu.php"); ?>
 <section class="top-page">
       <div id="header">
@@ -21,7 +22,7 @@
               </li>
             </ul>
             <!-- LOGIN BUTTON -->
-            <li><b><a href="login.html" id = "profileName" name="profileName" style="font-size: 25px;color: rgb(0, 217, 0);">Log In</a></b>
+            <li><b><a href="login.php" id = "profileName" name="profileName" style="font-size: 25px;color: rgb(0, 217, 0);">Log In</a></b>
             </li>
           </nav>
         </div>
