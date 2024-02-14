@@ -13,6 +13,11 @@
       echo''.$_SESSION['delete'].'';
       unset($_SESSION['delete']);
     }
+    if(isset($_SESSION['update']))
+    {
+      echo''.$_SESSION['update'].'';
+      unset($_SESSION['update']);
+    }
   ?>
 </div>
 
@@ -65,9 +70,11 @@
                   <td style="max-width: 250px;"><?php echo $description;?></td>
                   <td><?php echo $featured;?></td>
                   <td><?php echo $active;?></td>
-                  <td style="max-width: 200px;"><button type="button" class="btn btn-success" >Update Food</button>
+                  <td style="max-width: 200px;">
+                  <a href="<?php echo SITEURL; ?>admin/update-food.php?food_id=<?php echo $food_id; ?>" target="_self">
+                  <button type="button" class="btn btn-success" >Update Food</button></a>
                   <a href="<?php echo SITEURL; ?>admin/delete-food.php?food_id=<?php echo $food_id; ?>&image_name=<?php echo $image_name; ?>" target="_self">
-                      <button type="button" class="btn btn-danger" >Delete Food</button>
+                      <button type="button" class="btn btn-danger" >Delete Food</button></a>
                   </td>
                 </tr>
                 <?php

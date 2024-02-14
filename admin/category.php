@@ -1,6 +1,6 @@
 <?php include("partials/menu.php"); ?>
 
-<h1 style="margin-left: 1%;">Manage Category</h1>
+<h1 style="margin-left: 1%;">Manage Categories</h1>
 <div style="text-align:center;">
   <?php
     if(isset($_SESSION['category']))
@@ -12,6 +12,11 @@
     {
       echo''.$_SESSION['delete'].'';
       unset($_SESSION['delete']);
+    }
+    if(isset($_SESSION['update']))
+    {
+      echo''.$_SESSION['update'].'';
+      unset($_SESSION['update']);
     }
   ?>
 </div>
@@ -45,9 +50,11 @@
                 <tr> 
                   <td><?php echo $id++;?>.</td>
                   <td><?php echo $category;?></td>
-                  <td><button type="button" class="btn btn-success" >Update Category</button>
+                  <td>
+                  <a href="<?php echo SITEURL; ?>admin/update-category.php?ca_id=<?php echo $ca_id; ?>" target="_self">
+                  <button type="button" class="btn btn-success" >Update Category</button></a>
                   <a href="<?php echo SITEURL; ?>admin/delete-category.php?ca_id=<?php echo $ca_id; ?>" target="_self">
-                      <button type="button" class="btn btn-danger" >Delete Category</button>
+                      <button type="button" class="btn btn-danger" >Delete Category</button></a>
                   </td>
                 </tr>
                 <?php

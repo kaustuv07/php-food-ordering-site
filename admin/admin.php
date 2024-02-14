@@ -1,6 +1,6 @@
 <?php include("partials/menu.php"); ?>
 
-<h1 style="margin-left: 1%;">Manage Admin</h1>
+<h1 style="margin-left: 1%;">Manage Users</h1>
 <div style="text-align:center;">
   <?php
     if(isset($_SESSION['add']))
@@ -12,6 +12,11 @@
     {
       echo''.$_SESSION['delete'].'';
       unset($_SESSION['delete']);
+    }
+    if(isset($_SESSION['update']))
+    {
+      echo''.$_SESSION['update'].'';
+      unset($_SESSION['update']);
     }
   ?>
 </div>
@@ -50,9 +55,10 @@
                   <td><?php echo $username;?></td>
                   <td><?php echo $password;?></td>
                   <td><?php echo $role;?></td>
-                  <td><button type="button" class="btn btn-success" >Update Admin</button>
+                  <td><a href="<?php echo SITEURL; ?>admin/update-admin.php?username=<?php echo $username; ?>" target="_self">
+                  <button type="button" class="btn btn-success" >Update User</button></a>
                   <a href="<?php echo SITEURL; ?>admin/delete-admin.php?username=<?php echo $username; ?>" target="_self">
-                      <button type="button" class="btn btn-danger" >Delete Admin</button>
+                      <button type="button" class="btn btn-danger" >Delete User</button></a>
                   </td>
                 </tr>
                 <?php

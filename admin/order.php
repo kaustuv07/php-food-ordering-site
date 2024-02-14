@@ -1,6 +1,6 @@
 <?php include("partials/menu.php"); ?>
 
-<h1 style="margin-left: 1%;">Manage Order</h1>
+<h1 style="margin-left: 1%;">Manage Orders</h1>
 
 <table class="table table-success table-striped">
 <button type="button" class="btn btn-primary" style="margin-left:1%;">Add Order</button>
