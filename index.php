@@ -1,4 +1,3 @@
-<?php include("config/constants.php"); ?>
 <?php include("partials-frontend/menu.php"); ?>
 <section class="top-page">
       <div id="header">
@@ -12,18 +11,34 @@
             />
             <!-- HOME,ABOUT -->
             <ul>
-              <li><a href="#home">Home</a></li>
+              <li><a href="<?php echo SITEURL;?>">Home</a></li>
               <li><a href="#about">About</a></li>
               <li><a href="#menu">Menu</a></li>
-              <li><a href="./services.php">Services</a></li>
+              <li><a href="<?php echo SITEURL;?>services.php">Services</a></li>
               <li><a href="#contact">Contact</a></li>
               <li>
                 <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
               </li>
             </ul>
             <!-- LOGIN BUTTON -->
-            <li><b><a href="login.php" id = "profileName" name="profileName" style="font-size: 25px;color: rgb(0, 217, 0);">Log In</a></b>
+            <ul>
+            <li><b>
+                <?php if(isset($_SESSION["user"]))
+                {
+                ?>
+                    <a href="#" style="font-size: 25px;color: rgb(0, 217, 0);margin-left:-400%"><?php echo $_SESSION['user']; ?></a>
+                    </b></li>
+                <li><b>
+                    <a href="logout.php" style="color:red;margin-left: 125%;font-size:20px;">LogOut</a>
+                <?php
+                }else{
+                 ?> <a href="<?php echo SITEURL;?>login.php" id = "profileName" name="profileName" style="font-size: 25px;color: rgb(0, 217, 0);">Log In</a>
+                  <?php
+                }
+                ?>
+                </b>
             </li>
+            </ul>
           </nav>
         </div>
       </div>
@@ -57,24 +72,34 @@
     <!-- Most Popular section -->
     <section class="menu" id="menu">
       <h1>&mdash; Most Popular &mdash;</h1>
-      <div class="row">
-        <div class="menu-clm">
-          <img src="./css/images/cheesepizza.jpg" />
-          <div class="layer"></div>
-        </div>
-        <div class="menu-clm">
-          <img src="./css/images/chickenbiryani.jpg" />
-          <div class="layer"></div>
-        </div>
-        <div class="menu-clm">
-          <img src="./css/images/burger.png" />
-          <div class="layer"></div>
-        </div>
-        <div class="menu-clm">
-          <img src="./css/images/momo.jpg" />
-          <div class="layer"></div>
-        </div>
-      </div>
+
+      <?php
+          $sql = "SELECT * FROM  food WHERE active ='Yes' AND featured ='Yes' LIMIT 3";
+          $res = mysqli_query($conn,$sql);
+          $count = mysqli_num_rows($res);
+
+          if($count > 0)
+          {
+            while($row=mysqli_fetch_array($res))
+            {
+              $food_id = $row["food_id"];
+              $foodname = $row["foodname"];
+              $image_name = $row["image_name"];
+              ?>
+              <a href="#">
+                <div class="row" style ="display: inline-block;max-width:400px;">
+                  <div class="menu-clm">
+                    <img src="<?php echo SITEURL;?>css/images/food/<?php echo $image_name; ?>"alt="Pizza"/>
+                    <h3 style="color: black;"><?php echo $foodname?></h3>
+                    <div class="layer"></div>
+                  </div>
+                </div>
+              </a>
+              <?php
+            }
+          } 
+      ?>
+
     </section>
 
     <!-- ABOUT  -->
