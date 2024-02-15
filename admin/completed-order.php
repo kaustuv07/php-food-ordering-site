@@ -1,23 +1,13 @@
 <?php include("partials/menu.php"); ?>
 
-<h1 style="margin-left: 1%;">Orders History</h1>
-
-<div style="text-align:center;">
-  <?php
-    if(isset($_SESSION['update']))
-    {
-      echo''.$_SESSION['update'].'';
-      unset($_SESSION['update']);
-    }
-  ?>
-</div>
+<h1 style="margin-left: 1%;">Completed Orders History</h1>
 
 <table class="table table-success table-striped"style="margin: 1%;width: 98%;" id ="table">
 <a href="pending-order.php" target="_self"style="text-decoration: none; color: inherit;">
 <button type="button" class="btn btn-danger" style="margin-left:1%;background-color:orange;border-color:orange;">Pending Orders</button></a>
-<a href="completed-order.php" target="_self"style="text-decoration: none; color: inherit;">
-<button type="button" class="btn btn-success" style="margin-left:1%;">Completed Orders</button></a>
-  <thead >
+<a href="order.php" target="_self"style="text-decoration: none; color: inherit;">
+<button type="button" class="btn btn-success" style="margin-left:1%;">All Orders</button></a>
+<thead >
     <tr>
       <th scope="col"onclick="sortTable(1)">Order Date</th>
       <th scope="col"onclick="sortTable(2)">Food Item</th>
@@ -36,7 +26,8 @@
             INNER JOIN food ON
             food.food_id = ordertable.food_id
             INNER JOIN customerdetails ON
-            customerdetails.cus_id = ordertable.cus_id;
+            customerdetails.cus_id = ordertable.cus_id
+            WHERE orderstatus = 'Delivered'
             ";
             $res = mysqli_query($conn,$sql);
 
@@ -78,4 +69,7 @@
         ?>
   </tbody>
 </table>
+
+
+
 <?php include("partials/footer.php"); ?>

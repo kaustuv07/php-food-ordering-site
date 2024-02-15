@@ -12,26 +12,26 @@
   <body style="background-color:rgb(10, 38, 71);color:white;">
   <nav class="navbar navbar-expand-lg">
   <div class="container-fluid" style="background-color:lightblue;">
-    <a class="navbar-brand" href="index.php">Home</a>
+    <a class="navbar-brand" href="index.php"style="margin-right: 50px;">Home</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="admin.php">Users</a>
+          <a class="nav-link" aria-current="page" href="admin.php"style="margin-right: 50px;">Users</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="category.php">Categories</a>
+          <a class="nav-link" href="category.php"style="margin-right: 50px;">Categories</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="food.php">Foods</a>
+          <a class="nav-link" href="food.php"style="margin-right: 50px;">Foods</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="order.php">Orders</a>
+          <a class="nav-link" href="order.php"style="margin-right: 50px;">Orders</a>
         </li>
         
-          <a href="logout.php" style="float: right;color:red;margin-left: 250%;font-size:28px;"><b>LogOut</b></a>
+          <a href="logout.php" style="float: right;color:red;margin-left: 125%;font-size:28px;"><b>LogOut</b></a>
         
       </ul>
     </div>

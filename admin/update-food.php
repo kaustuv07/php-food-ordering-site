@@ -24,7 +24,62 @@
             header("location:".SITEURL."admin/category.php");
         }
     }
+    if(isset($_POST["submit"]))
+    {
+        $food_id=$_POST["food_id"];
+        $foodname = $_POST["foodname"];
+        $category= $_POST["category"];
+        $cost = $_POST["cost"];
+        $description = $_POST["description"];
+        $featured = $_POST["featured"];
+        $active = $_POST["active"];
 
+        $sql = "SELECT ca_id FROM category WHERE category = '$category'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $ca_id = $row['ca_id'];
+        
+        if (isset($_FILES['image'])) {
+            $image_name = $_FILES['image']['name'];
+            $image_tmp = $_FILES['image']['tmp_name'];
+            $image_dst = "../css/images/food/" . $image_name;
+            
+            if (move_uploaded_file($image_tmp, $image_dst)) {
+                // Image uploaded successfully
+                $sql = "UPDATE food SET
+                foodname = '$foodname',
+                ca_id = '$ca_id',
+                cost = '$cost',
+                description = '$description',
+                image_name = '$image_name',
+                featured = '$featured',
+                active = '$active'
+                WHERE food_id = '$food_id'
+                ";
+                if (mysqli_query($conn, $sql)) {
+                    $_SESSION['update'] = 'Food updated successfully';
+                    $current_image = $_POST["current_image"];
+                    $path = "../css/images/food/".$current_image;
+                    $remove = unlink($path);
+                    header("location:".SITEURL."admin/food.php");
+                } else {
+                    $_SESSION['update'] = 'Failed to update Food';
+                    header("location:".SITEURL."admin/update-food.php");
+                    exit();
+                }
+            } else {
+                // Failed to upload image
+                $_SESSION['update'] = "<div class='error' style='text-align:center;'>Failed to upload image.</div>";
+                header('location:' . SITEURL . 'admin/update-food.php');
+                exit();
+            }
+        } else {
+            // Image not uploaded
+            $_SESSION['update'] = "<div class='error' style='text-align:center;'>Image not uploaded.</div>";
+            header('location:' . SITEURL . 'admin/update-food.php');
+            exit();
+        }
+    }
 ?>
 <h1 style="margin-left: 5%;">Update Food</h1>
 <div style="text-align:center;">
@@ -96,63 +151,5 @@ if ($result->num_rows > 0) {
 
   <button type="submit" class="btn btn-primary"style="margin-left: 5%;margin-bottom:1%;"name="submit">Update Food</button>
 </form>
-<?php 
-    if(isset($_POST["submit"]))
-    {
-        $food_id=$_POST["food_id"];
-        $foodname = $_POST["foodname"];
-        $category= $_POST["category"];
-        $cost = $_POST["cost"];
-        $description = $_POST["description"];
-        $featured = $_POST["featured"];
-        $active = $_POST["active"];
-
-        $sql = "SELECT ca_id FROM category WHERE category = '$category'";
-        $result = mysqli_query($conn, $sql);
-        $row = mysqli_fetch_assoc($result);
-        $ca_id = $row['ca_id'];
-        
-        if (isset($_FILES['image'])) {
-            $image_name = $_FILES['image']['name'];
-            $image_tmp = $_FILES['image']['tmp_name'];
-            $image_dst = "../css/images/food/" . $image_name;
-            
-            if (move_uploaded_file($image_tmp, $image_dst)) {
-                // Image uploaded successfully
-                $sql = "UPDATE food SET
-                foodname = '$foodname',
-                ca_id = '$ca_id',
-                cost = '$cost',
-                description = '$description',
-                image_name = '$image_name',
-                featured = '$featured',
-                active = '$active'
-                WHERE food_id = '$food_id'
-                ";
-                if (mysqli_query($conn, $sql)) {
-                    $_SESSION['update'] = 'Food updated successfully';
-                    $current_image = $_POST["current_image"];
-                    $path = "../css/images/food/".$current_image;
-                    $remove = unlink($path);
-                    header("location:".SITEURL."admin/food.php");
-                    exit();
-                } else {
-                    $_SESSION['update'] = 'Failed to update Food';
-                    header("location:".SITEURL."admin/update-food.php");
-                    exit();
-                }
-            } else {
-                // Failed to upload image
-                $_SESSION['update'] = "<div class='error' style='text-align:center;'>Failed to upload image.</div>";
-                header('location:' . SITEURL . 'admin/update-food.php');
-                exit();
-            }
-        } else {
-            // Image not uploaded
-            $_SESSION['update'] = "<div class='error' style='text-align:center;'>Image not uploaded.</div>";
-            header('location:' . SITEURL . 'admin/update-food.php');
-            exit();
-        }
-    }
- include("partials/footer.php"); ?>
+<?php include("partials/footer.php"); ?>
 

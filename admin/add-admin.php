@@ -21,13 +21,13 @@
   <button type="submit" class="btn btn-primary"style="margin-left: 5%;margin-bottom:1%;"name="submit">Add Admin</button>
 </form>
 
-<?php include("partials/footer.php"); ?>
+
 
 <?php 
     if(isset($_POST["submit"]))
     {
-        $username=$_POST["username"];
-        $password=md5($_POST["password"]);
+        $username=$conn->real_escape_string($_POST["username"]);
+        $password=$conn->real_escape_string(md5($_POST["password"]));
 
         $sql = "INSERT INTO logintable SET
                 username='$username',
@@ -48,5 +48,6 @@
            header("location:".SITEURL."admin/add-admin.php");
         }
     }
+    include("partials/footer.php");
 ?>
 

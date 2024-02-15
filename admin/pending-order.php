@@ -1,6 +1,6 @@
 <?php include("partials/menu.php"); ?>
 
-<h1 style="margin-left: 1%;">Orders History</h1>
+<h1 style="margin-left: 1%;">Pending Orders</h1>
 
 <div style="text-align:center;">
   <?php
@@ -13,11 +13,11 @@
 </div>
 
 <table class="table table-success table-striped"style="margin: 1%;width: 98%;" id ="table">
-<a href="pending-order.php" target="_self"style="text-decoration: none; color: inherit;">
-<button type="button" class="btn btn-danger" style="margin-left:1%;background-color:orange;border-color:orange;">Pending Orders</button></a>
 <a href="completed-order.php" target="_self"style="text-decoration: none; color: inherit;">
 <button type="button" class="btn btn-success" style="margin-left:1%;">Completed Orders</button></a>
-  <thead >
+<a href="order.php" target="_self"style="text-decoration: none; color: inherit;">
+<button type="button" class="btn btn-success" style="margin-left:1%;">All Orders</button></a>
+<thead >
     <tr>
       <th scope="col"onclick="sortTable(1)">Order Date</th>
       <th scope="col"onclick="sortTable(2)">Food Item</th>
@@ -28,6 +28,7 @@
       <th scope="col"onclick="sortTable(7)">Phone No.</th>
       <th scope="col"onclick="sortTable(8)">Address</th>
       <th scope="col"onclick="sortTable(9)">Status</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -36,7 +37,8 @@
             INNER JOIN food ON
             food.food_id = ordertable.food_id
             INNER JOIN customerdetails ON
-            customerdetails.cus_id = ordertable.cus_id;
+            customerdetails.cus_id = ordertable.cus_id
+            WHERE orderstatus!= 'Delivered' AND orderstatus!='Cancelled'
             ";
             $res = mysqli_query($conn,$sql);
 
@@ -68,6 +70,10 @@
                   <td><?php echo $cus_mobile;?></td>
                   <td><?php echo $cus_address;?></td>
                   <td><?php echo $orderstatus;?></td>
+                  <td style="display: flex;flex-direction: column;">
+                  <a href="<?php echo SITEURL; ?>admin/update-order.php?order_id=<?php echo $order_id; ?>" target="_self">
+                  <button type="button" class="btn btn-primary" >Update Order Status</button></a>
+                  </td>
                 </tr>
                 <?php
             }
@@ -78,4 +84,7 @@
         ?>
   </tbody>
 </table>
+
+
+
 <?php include("partials/footer.php"); ?>
