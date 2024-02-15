@@ -49,21 +49,18 @@
       </div>
       <!-- SEACH BAR -->
       <div class="search-bar-frontpage">
-        <form
-          class="search-bar-1"
-          onsubmit="event.preventDefault();"
-          role="search"
-        >
+        <form class="search-bar-1" action="<?php echo SITEURL;?>search.php" method ="POST">
           <label id="search-bar-lable" for="search">Search...</label>
           <input
             id="search"
             type="search"
-            placeholder="Search..."
+            placeholder="Search for Food..."
             autofocus
+            name ="search"
             required
           />
           <!-- SEARCH BUTTON -->
-          <button id="search-button" type="submit">
+          <button id="search-button" type="submit" name="submit">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
