@@ -88,16 +88,16 @@
               $cost = $row["cost"];
               $description = $row["description"];
               ?>
-              <a href="#">
+              <a href="#" style="text-decoration: none;">
                 <div class="row" style ="display: inline-block;max-width:400px;">
                   <div class="menu-clm">
                     <img src="<?php echo SITEURL;?>css/images/food/<?php echo $image_name; ?>"alt="Pizza"/>
                     <h3 style="color: black;"><?php echo $foodname?></h3>
                     <h3 style="color: green;">Rs. <?php echo $cost?></h3>
+                    </a>
                     <div class="layer"></div>
                   </div>
                 </div>
-              </a>
               <?php
             }
           } 

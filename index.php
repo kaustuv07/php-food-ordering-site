@@ -26,7 +26,7 @@
                 <?php if(isset($_SESSION["user"]))
                 {
                 ?>
-                    <a href="#" style="font-size: 25px;color: rgb(0, 217, 0);margin-left:-400%"><?php echo $_SESSION['user']; ?></a>
+                    <a href="user-panel.php" style="font-size: 25px;color: rgb(0, 217, 0);margin-left:-400%"><?php echo $_SESSION['user']; ?></a>
                     </b></li>
                 <li><b>
                     <a href="logout.php" style="color:red;margin-left: 125%;font-size:20px;">LogOut</a>
@@ -83,15 +83,15 @@
               $foodname = $row["foodname"];
               $image_name = $row["image_name"];
               ?>
-              <a href="#">
+              <a href="#" style="text-decoration: none;">
                 <div class="row" style ="display: inline-block;max-width:400px;">
                   <div class="menu-clm">
                     <img src="<?php echo SITEURL;?>css/images/food/<?php echo $image_name; ?>"alt="Pizza"/>
                     <h3 style="color: black;"><?php echo $foodname?></h3>
+                    </a>
                     <div class="layer"></div>
                   </div>
                 </div>
-              </a>
               <?php
             }
           } 
