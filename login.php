@@ -30,6 +30,11 @@
                     echo $_SESSION['login'];
                     unset($_SESSION['login']);
                 }
+                if(isset($_SESSION["delete"]))
+                {
+                    echo $_SESSION['delete'];
+                    unset($_SESSION['delete']);
+                }
             ?>
             <div class="inputbox">
               <ion-icon name="person-circle-outline"></ion-icon>
@@ -85,7 +90,6 @@
 
         if($count == 1)
         {
-            $_SESSION['login'] = "<div class='success'>Login Successfull.</div>";
             $_SESSION['user'] = $username;
 
             header('location:'.SITEURL.'index.php');
