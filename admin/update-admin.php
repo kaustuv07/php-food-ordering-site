@@ -1,6 +1,4 @@
-<?php include("partials/menu.php"); ?>
-
-<?php
+<?php include("partials/menu.php"); 
     $username =$_GET['username'];
     $sql = "SELECT * FROM logintable WHERE username ='$username'";
     $res = mysqli_query($conn, $sql);
@@ -18,6 +16,32 @@
         else
         {
             header("location:".SITEURL."admin/manage-admin.php");
+        }
+    }
+
+    if(isset($_POST["submit"]))
+    {
+        $username=$_POST["username"];
+        $password=md5($_POST["password"]);
+        $roles = $_POST["roles"];
+
+        $sql = "UPDATE logintable SET
+                password='$password',
+                roles='$roles'
+                WHERE username = '$username'
+                ";
+        
+        $res = mysqli_query($conn, $sql);
+
+        if($res==true)
+        {
+           $_SESSION['update'] = 'User updated successfully';
+           header("location:".SITEURL."admin/admin.php");
+        }
+        else
+        {
+            $_SESSION['update'] = 'Failed to update User';
+           header("location:".SITEURL."admin/update-admin.php");
         }
     }
 
@@ -50,32 +74,4 @@
 </form>
 
 <?php include("partials/footer.php"); ?>
-
-<?php 
-    if(isset($_POST["submit"]))
-    {
-        $username=$_POST["username"];
-        $password=md5($_POST["password"]);
-        $roles = $_POST["roles"];
-
-        $sql = "UPDATE logintable SET
-                password='$password',
-                roles='$roles'
-                WHERE username = '$username'
-                ";
-        
-        $res = mysqli_query($conn, $sql);
-
-        if($res==true)
-        {
-           $_SESSION['update'] = 'User updated successfully';
-           header("location:".SITEURL."admin/admin.php");
-        }
-        else
-        {
-            $_SESSION['update'] = 'Failed to update User';
-           header("location:".SITEURL."admin/update-admin.php");
-        }
-    }
-?>
 

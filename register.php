@@ -24,7 +24,7 @@
           <div class="inputbox">
             <ion-icon name="person-circle-outline"></ion-icon>
             <input type="text" id="firstName" name="firstName" required />
-            <label for="firstName">Legal Name</label>
+            <label for="firstName">Full Name</label>
           </div>
 
           <div class="inputbox">

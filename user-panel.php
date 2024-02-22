@@ -5,16 +5,7 @@
       <!-- LOGO -->
       <img class="page-logo" src="./css/images/logo.png" alt="SnackPack Logo" />
       <!-- HOME,ABOUT -->
-      <ul>
-        <li><a href="<?php echo SITEURL; ?>">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#menu">Menu</a></li>
-        <li><a href="<?php echo SITEURL; ?>services.php">Services</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li>
-          <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
-        </li>
-      </ul>
+      <?php include("partials-frontend/nav-bar.php"); ?>
       <!-- LOGIN BUTTON -->
       <ul>
         <li><b>
@@ -65,15 +56,24 @@ if ($res == true) {
 ?>
 
 <div style="background-color:#74b659;padding:80px;display: grid; grid-template-columns: auto auto; grid-gap: 20px; justify-content: flex-start;">
-    <div>
+    <div><h1>
         <?php
         if (isset($_SESSION["delete"])) {
             echo $_SESSION['delete'];
             unset($_SESSION['delete']);
         }
+        if (isset($_SESSION['change'])) {
+            echo $_SESSION['change'];
+            unset($_SESSION['change']);
+        }
+        if (isset($_SESSION['update'])) {
+          echo $_SESSION['update'];
+          unset($_SESSION['update']);
+      }
         ?>
+        </h1>
         <h1 style="margin: 0; margin-bottom: 10px;">Username :</h1>
-        <h1 style="margin: 0; margin-bottom: 10px;">Legal Name :</h1>
+        <h1 style="margin: 0; margin-bottom: 10px;">Full Name :</h1>
         <h1 style="margin: 0; margin-bottom: 10px;">Phone No. :</h1>
         <h1 style="margin: 0; margin-bottom: 10px;">Email :</h1>
         <h1 style="margin: 0; margin-bottom: 10px;">Address :</h1>
