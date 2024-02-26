@@ -28,6 +28,9 @@
           <a class="nav-link" href="food.php"style="margin-right: 50px;">Foods</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="feedback.php"style="margin-right: 50px;">Feedbacks</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="order.php"style="margin-right: 50px;">Orders</a>
         </li>
         

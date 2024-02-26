@@ -12,22 +12,22 @@
   ?>
 </div>
 
-<table class="table table-success table-striped"style="margin: 1%;width: 98%;" id ="table">
+<table class="table table-success table-striped"style="margin: 1%;width: 98%;">
 <a href="pending-order.php" target="_self"style="text-decoration: none; color: inherit;">
 <button type="button" class="btn btn-danger" style="margin-left:1%;background-color:orange;border-color:orange;">Pending Orders</button></a>
 <a href="completed-order.php" target="_self"style="text-decoration: none; color: inherit;">
 <button type="button" class="btn btn-success" style="margin-left:1%;">Completed Orders</button></a>
   <thead >
     <tr>
-      <th scope="col"onclick="sortTable(1)">Order Date</th>
-      <th scope="col"onclick="sortTable(2)">Food Item</th>
-      <th scope="col"onclick="sortTable(3)">Price</th>
-      <th scope="col"onclick="sortTable(4)">Quantity</th>
-      <th scope="col"onclick="sortTable(5)">Total</th>
-      <th scope="col"onclick="sortTable(6)">Username</th>
-      <th scope="col"onclick="sortTable(7)">Phone No.</th>
-      <th scope="col"onclick="sortTable(8)">Address</th>
-      <th scope="col"onclick="sortTable(9)">Status</th>
+      <th scope="col">Order Date</th>
+      <th scope="col">Food Item</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Total</th>
+      <th scope="col">Username</th>
+      <th scope="col">Phone No.</th>
+      <th scope="col">Address</th>
+      <th scope="col">Status</th>
     </tr>
   </thead>
   <tbody>
@@ -36,7 +36,8 @@
             INNER JOIN food ON
             food.food_id = ordertable.food_id
             INNER JOIN customerdetails ON
-            customerdetails.cus_id = ordertable.cus_id;
+            customerdetails.cus_id = ordertable.cus_id
+            ORDER BY date DESC;
             ";
             $res = mysqli_query($conn,$sql);
 

@@ -55,44 +55,65 @@ if ($res == true) {
 }
 ?>
 
-<div style="background-color:#74b659;padding:80px;display: grid; grid-template-columns: auto auto; grid-gap: 20px; justify-content: flex-start;">
-    <div><h1>
-        <?php
-        if (isset($_SESSION["delete"])) {
-            echo $_SESSION['delete'];
-            unset($_SESSION['delete']);
-        }
-        if (isset($_SESSION['change'])) {
-            echo $_SESSION['change'];
-            unset($_SESSION['change']);
-        }
-        if (isset($_SESSION['update'])) {
-          echo $_SESSION['update'];
-          unset($_SESSION['update']);
+<div
+  style="background-color:#74b659;padding:80px;display: grid; grid-template-columns: auto auto; grid-gap: 20px; justify-content: flex-start;">
+  <div>
+    <h1>
+      <?php
+      if (isset($_SESSION["delete"])) {
+        echo $_SESSION['delete'];
+        unset($_SESSION['delete']);
       }
-        ?>
-        </h1>
-        <h1 style="margin: 0; margin-bottom: 10px;">Username :</h1>
-        <h1 style="margin: 0; margin-bottom: 10px;">Full Name :</h1>
-        <h1 style="margin: 0; margin-bottom: 10px;">Phone No. :</h1>
-        <h1 style="margin: 0; margin-bottom: 10px;">Email :</h1>
-        <h1 style="margin: 0; margin-bottom: 10px;">Address :</h1>
-    </div>
+      if (isset($_SESSION['change'])) {
+        echo $_SESSION['change'];
+        unset($_SESSION['change']);
+      }
+      if (isset($_SESSION['update'])) {
+        echo $_SESSION['update'];
+        unset($_SESSION['update']);
+      }
+      ?>
+    </h1>
+    <h1 style="margin: 0; margin-bottom: 10px;">Username :</h1>
+    <h1 style="margin: 0; margin-bottom: 10px;">Full Name :</h1>
+    <h1 style="margin: 0; margin-bottom: 10px;">Phone No. :</h1>
+    <h1 style="margin: 0; margin-bottom: 10px;">Email :</h1>
+    <h1 style="margin: 0; margin-bottom: 10px;">Address :</h1>
+  </div>
 
-    <div style="display: flex; flex-direction: column;">
-        <h1 style="margin: 0; margin-bottom: 10px;"><?php echo $_SESSION['user']; ?></h1>
-        <h1 style="margin: 0; margin-bottom: 10px;"><?php echo $cus_name; ?></h1>
-        <h1 style="margin: 0; margin-bottom: 10px;"><?php echo $cus_mobile; ?></h1>
-        <h1 style="margin: 0; margin-bottom: 10px;"><?php echo $cus_email; ?></h1>
-        <h1 style="margin: 0; margin-bottom: 10px;"><?php echo $cus_address; ?></h1>
-        <div style="display: flex; flex-wrap: wrap;">
-            <a href="<?php echo SITEURL; ?>order-user.php?username=<?php echo $username; ?>" target="_self" style="display: inline-block; padding: 10px 20px; background-color: #ffffff; color: #333333; text-decoration: none; border: none; border-radius: 5px; margin-right: 10px; margin-bottom: 10px;">My Orders</a>
-            <a href="<?php echo SITEURL; ?>password-user.php?username=<?php echo $username; ?>" target="_self" style="display: inline-block; padding: 10px 20px; background-color: #ffffff; color: #333333; text-decoration: none; border: none; border-radius: 5px; margin-right: 10px; margin-bottom: 10px;">Change Password</a>
-            <a href="<?php echo SITEURL; ?>update-user.php?username=<?php echo $username; ?>" target="_self" style="display: inline-block; padding: 10px 20px; background-color: #ffffff; color: #333333; text-decoration: none; border: none; border-radius: 5px; margin-right: 10px; margin-bottom: 10px;">Update Details</a>
-            <a href="<?php echo SITEURL; ?>delete-user.php?username=<?php echo $username; ?>" target="_self" style="display: inline-block; padding: 10px 20px; background-color: #ffffff; color: #333333; text-decoration: none; border: none; border-radius: 5px; margin-right: 10px; margin-bottom: 10px;">Delete Account</a>
-        </div>
+  <div style="display: flex; flex-direction: column;">
+    <h1 style="margin: 0; margin-bottom: 10px;">
+      <?php echo $_SESSION['user']; ?>
+    </h1>
+    <h1 style="margin: 0; margin-bottom: 10px;">
+      <?php echo $cus_name; ?>
+    </h1>
+    <h1 style="margin: 0; margin-bottom: 10px;">
+      <?php echo $cus_mobile; ?>
+    </h1>
+    <h1 style="margin: 0; margin-bottom: 10px;">
+      <?php echo $cus_email; ?>
+    </h1>
+    <h1 style="margin: 0; margin-bottom: 10px;">
+      <?php echo $cus_address; ?>
+    </h1>
+    <div style="display: flex; flex-wrap: wrap;">
+      <a href="<?php echo SITEURL; ?>order-user.php?username=<?php echo $username; ?>" target="_self"
+        style="display: inline-block; padding: 10px 20px; background-color: #ffffff; color: #333333; text-decoration: none; border: none; border-radius: 5px; margin-right: 10px; margin-bottom: 10px;">My
+        Orders</a>
+      <a href="<?php echo SITEURL; ?>password-user.php?username=<?php echo $username; ?>" target="_self"
+        style="display: inline-block; padding: 10px 20px; background-color: #ffffff; color: #333333; text-decoration: none; border: none; border-radius: 5px; margin-right: 10px; margin-bottom: 10px;">Change
+        Password</a>
+      <a href="<?php echo SITEURL; ?>update-user.php?username=<?php echo $username; ?>" target="_self"
+        style="display: inline-block; padding: 10px 20px; background-color: #ffffff; color: #333333; text-decoration: none; border: none; border-radius: 5px; margin-right: 10px; margin-bottom: 10px;">Update
+        Details</a>
+      <a href="<?php echo SITEURL; ?>delete-user.php?username=<?php echo $username; ?>" target="_self"
+        style="display: inline-block; padding: 10px 20px; background-color: #ffffff; color: #333333; text-decoration: none; border: none; border-radius: 5px; margin-right: 10px; margin-bottom: 10px;">Delete
+        Account</a>
     </div>
+  </div>
 </div>
+
 
 
 
