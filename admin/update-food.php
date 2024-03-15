@@ -21,7 +21,7 @@
         }
         else
         {
-            header("location:".SITEURL."admin/category.php");
+            header("location:".SITEURL."admin/food.php");
         }
     }
     if(isset($_POST["submit"]))
@@ -74,6 +74,23 @@
                 exit();
             }
         } else {
+         $sql = "UPDATE food SET
+                foodname = '$foodname',
+                ca_id = '$ca_id',
+                cost = '$cost',
+                description = '$description',
+                featured = '$featured',
+                active = '$active'
+                WHERE food_id = '$food_id'
+                ";
+                if (mysqli_query($conn, $sql)) {
+                    $_SESSION['update'] = 'Food updated successfully';
+                    header("location:".SITEURL."admin/food.php");
+                } else {
+                    $_SESSION['update'] = 'Failed to update Food';
+                    header("location:".SITEURL."admin/update-food.php");
+                    exit();
+                }
             // Image not uploaded
             $_SESSION['update'] = "<div class='error' style='text-align:center;'>Image not uploaded.</div>";
             header('location:' . SITEURL . 'admin/update-food.php');
@@ -97,10 +114,10 @@
 
 <div class="mb-3" style="max-width: 300px; margin-left: 5%;">
         <label for="image" class="form-label">Select Food Image:</label>
-        <input type="file" class="form-control" id="image" name="image" required>
+        <input type="file" class="form-control" id="image" name="image">
         <p>Current Image: <?php echo $image_name; ?></p>
     </div>
-    <input type="hidden" name="current_image" value="<?php echo $image_name;?>" required>
+    <input type="hidden" name="current_image" value="<?php echo $image_name;?>">
 
   <div class="mb-3"style="max-width: 300px;margin-left: 5%;">
     <label for="foodname" class="form-label">Food Name:</label>

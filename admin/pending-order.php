@@ -28,6 +28,8 @@
       <th scope="col">Phone No.</th>
       <th scope="col">Address</th>
       <th scope="col">Status</th>
+      <th scope="col">Custom Status</th>
+      <th scope="col">Payment Method</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -60,6 +62,8 @@
                   $cus_address = $row["cus_address"];
                   $cus_mobile = $row["cus_mobile"];
                   $cost = $row["cost"];
+                  $custom_status = $row["custom_status"];
+                  $payment_method = $row["payment_method"];
                   ?>
                 <tr> 
                   <td><?php echo $date;?></td>
@@ -71,9 +75,11 @@
                   <td><?php echo $cus_mobile;?></td>
                   <td><?php echo $cus_address;?></td>
                   <td><?php echo $orderstatus;?></td>
+                  <td><?php echo $custom_status;?></td>
+                  <td><?php echo $payment_method;?></td>
                   <td style="display: flex;flex-direction: column;">
                   <a href="<?php echo SITEURL; ?>admin/update-order.php?order_id=<?php echo $order_id; ?>" target="_self">
-                  <button type="button" class="btn btn-primary" >Update Order Status</button></a>
+                  <button type="button" class="btn btn-primary" >Update</button></a>
                   </td>
                 </tr>
                 <?php

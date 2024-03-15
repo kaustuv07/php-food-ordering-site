@@ -34,7 +34,7 @@
           <a class="nav-link" href="order.php"style="margin-right: 50px;">Orders</a>
         </li>
         
-          <a href="logout.php" style="float: right;color:red;margin-left: 125%;font-size:28px;"><b>LogOut</b></a>
+          <a href="logout.php" style="float: right;color:red;margin-left: 70%;font-size:28px;"><b>LogOut</b></a>
         
       </ul>
     </div>

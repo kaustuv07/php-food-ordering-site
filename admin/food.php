@@ -41,7 +41,8 @@
   <?php
             $sql = "SELECT * FROM category 
                     INNER JOIN food ON
-                    category.ca_id = food.ca_id";
+                    category.ca_id = food.ca_id
+                    ORDER BY category DESC,featured DESC,active DESC";
             $res = mysqli_query($conn,$sql);
             $id=1;
 

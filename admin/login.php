@@ -11,7 +11,7 @@
       <div class="form-box">
         <div class="form-value">
           <form action="" method="post">
-            <h2>Login</h2>
+            <h2>Admin Login</h2>
             <br>
             <div style="color:white;">
             <?php

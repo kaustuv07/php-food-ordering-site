@@ -25,6 +25,7 @@
             $cus_address = $row["cus_address"];
             $cus_mobile = $row["cus_mobile"];
             $cost = $row["cost"];
+            $custom_status = $row["custom_status"];
         }
         else
         {
@@ -35,9 +36,11 @@
     {
         $order_id = $_POST["order_id"];
         $orderstatus =$_POST["orderstatus"];
+        $custom_status =$_POST["custom_status"];
 
         $sql = "UPDATE ordertable
-                SET orderstatus='$orderstatus'
+                SET orderstatus='$orderstatus',
+                custom_status='$custom_status'
                 WHERE order_id = '$order_id'
                 ";
         $res = mysqli_query($conn, $sql);
@@ -99,6 +102,11 @@
     <option value="Cancelled"name="orderstatus" <?php if($orderstatus == 'Cancelled') echo 'selected';?>>Cancelled</option>
   </select>
     </div>
+
+    <div class="mb-3"style="max-width: 300px;margin-left: 5%;">
+    <label for="foodname" class="form-label">Custom status : </label>
+    <textarea name="custom_status" cols="30" rows="2" required><?php echo $custom_status ?></textarea>
+  </div>
 
   <button type="submit" class="btn btn-primary"style="margin-left: 5%;margin-bottom:1%;"name="submit">Update Order</button>
 </form>

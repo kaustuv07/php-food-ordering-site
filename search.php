@@ -17,7 +17,7 @@
                 <?php if(isset($_SESSION["user"]))
                 {
                 ?>
-                    <a href="#" style="font-size: 25px;color: rgb(0, 217, 0);margin-left:-400%"><?php echo $_SESSION['user']; ?></a>
+                    <a href="#" style="font-size: 25px;color: rgb(0, 217, 0);"><?php echo $_SESSION['user']; ?></a>
                     </b></li>
                 <li><b>
                     <a href="logout.php" style="color:red;margin-left: 125%;font-size:20px;">LogOut</a>

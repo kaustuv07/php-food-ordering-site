@@ -28,14 +28,13 @@
     <tr>
       <th scope="col">S.N.</th>
       <th scope="col">Username</th>
-      <th scope="col">Password</th>
       <th scope="col">Role</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
   <?php
-            $sql = "SELECT * FROM logintable";
+            $sql = "SELECT * FROM logintable ORDER BY roles";
             $res = mysqli_query($conn,$sql);
             $id=1;
 
@@ -47,13 +46,11 @@
                 while($row = mysqli_fetch_array($res))
                 {
                   $username =$row["username"];
-                  $password =$row["password"];
                   $role =$row["roles"];
                   ?>
                 <tr> 
                   <td><?php echo $id++;?>.</td>
                   <td><?php echo $username;?></td>
-                  <td><?php echo $password;?></td>
                   <td><?php echo $role;?></td>
                   <td><a href="<?php echo SITEURL; ?>admin/update-admin.php?username=<?php echo $username; ?>" target="_self">
                   <button type="button" class="btn btn-success" >Update User</button></a>

@@ -53,7 +53,7 @@
   <h1>&mdash; Most Popular &mdash;</h1>
 
   <?php
-  $sql = "SELECT * FROM  food WHERE active ='Yes' AND featured ='Yes' LIMIT 3";
+  $sql = "SELECT * FROM  food WHERE active ='Yes' AND featured ='Yes' LIMIT 6";
   $res = mysqli_query($conn, $sql);
   $count = mysqli_num_rows($res);
 
@@ -64,7 +64,7 @@
       $image_name = $row["image_name"];
       ?>
       <a href="#" style="text-decoration: none;">
-        <div class="row" style="display: inline-block;max-width:400px;">
+        <div class="row" style="display: inline-block;max-width:350px;">
           <div class="menu-clm">
             <img src="<?php echo SITEURL; ?>css/images/food/<?php echo $image_name; ?>" alt="Pizza" />
             <h3 style="color: black;">
@@ -115,51 +115,53 @@
 <section class="review" id="review">
   <h2>&mdash; Customer Reviews &mdash;</h2>
   <?php
-        $sql = "SELECT * FROM feedback 
+  $sql = "SELECT * FROM feedback 
                   INNER JOIN food ON
                   food.food_id = feedback.food_id
                   INNER JOIN customerdetails ON
                   customerdetails.cus_id = feedback.cus_id
                   ORDER BY date DESC LIMIT 3";
-        $res = mysqli_query($conn, $sql);
-        $count = mysqli_num_rows($res);
+  $res = mysqli_query($conn, $sql);
+  $count = mysqli_num_rows($res);
 
-        if ($res == TRUE) {
-          if ($count > 0) {
-            while ($row = mysqli_fetch_array($res)) {
-              $username = $row["username"];
-              $feedback = $row["feedback"];
-              $rating = $row["rating"];
-              ?>
-  <div class="slide">
-    <i class="fas fa-quote-right"></i>
-    <div class="user">
-      <img src="./css/images/girl.jpg" />
-      <div class="userinfo">
+  if ($res == TRUE) {
+    if ($count > 0) {
+      while ($row = mysqli_fetch_array($res)) {
+        $username = $row["username"];
+        $feedback = $row["feedback"];
+        $rating = $row["rating"];
+        ?>
+        <div class="slide">
+          <i class="fas fa-quote-right"></i>
+          <div class="user">
+            <img src="./css/images/girl.jpg" />
+            <div class="userinfo">
               <h3>
                 <?php echo $username; ?>
               </h3>
               <div class="stars">
-                <?php for( $i = 0; $i < $rating; $i++ ){ ?>
+                <?php
+                for ($i = 0; $i < floor($rating); $i++) { ?>
                   <i class="fas fa-star"></i>
                 <?php }
-                if ($rating){ ?>
+
+                if ($rating - floor($rating) >= 0.5) { ?>
                   <i class="fas fa-star-half-alt"></i>
-                <?php } ?> 
+                <?php } ?>
               </div>
             </div>
             <p>
-              <?php echo ' '.$feedback; ?>
+              <?php echo ' ' . $feedback; ?>
             </p>
-    </div>
-  </div>
-  <?php
-            }
-          } else {
+          </div>
+        </div>
+        <?php
+      }
+    } else {
 
-          }
-        }
-        ?>
+    }
+  }
+  ?>
 </section>
 
 <!-- CONTACT SECTION -->
