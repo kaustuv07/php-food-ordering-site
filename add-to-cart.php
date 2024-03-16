@@ -1,4 +1,4 @@
-<?php include("./config/constants.php");
+<?php include("config/constants.php");
 
 // Check if the item ID is provided
 if (isset($_POST['item_id'])) {

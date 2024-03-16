@@ -1,23 +1,46 @@
-<?php include("partials-frontend/menu.php");
+<?php include ("partials-frontend/menu.php");
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-$(document).ready(function() {
-    $('.add-to-cart-btn').click(function() {
-        var itemId = $(this).attr('data-item-id');
-        $.ajax({
-            url: 'add-to-cart.php',
-            type: 'post',
-            data: { item_id: itemId },
-            success: function(response) {
-                alert('Item added to cart');
-            },
-            error: function(xhr, status, error) {
-                alert('An error occurred while adding the item to cart');
-            }
+    $(document).ready(function () {
+        // Event listener for filter dropdown change
+        $('#filter').change(function () {
+            console.log("Filter dropdown changed"); // Add this line for debugging
+            var category = $(this).val();
+            console.log("Selected category: " + category); // Add this line for debugging
+            $.ajax({
+                url: 'filter-menu.php',
+                type: 'post',
+                data: { category: category },
+                success: function (response) {
+                    console.log("Response from server: " + response); // Add this line for debugging
+                    // Replace the menu items with filtered ones
+                    $('.menu-container').html(response);
+                },
+                error: function (xhr, status, error) {
+                    alert('An error occurred while filtering the menu');
+                    console.error(xhr.responseText); // Add this line for debugging
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('.add-to-cart-btn').click(function () {
+                var itemId = $(this).attr('data-item-id');
+                $.ajax({
+                    url: 'add-to-cart.php',
+                    type: 'post',
+                    data: { item_id: itemId },
+                    success: function (response) {
+                        alert('Item added to cart');
+                    },
+                    error: function (xhr, status, error) {
+                        alert('An error occurred while adding the item to cart');
+                    }
+                });
+            });
         });
     });
-});
 </script>
 <div id="header" style="background-color:black;">
     <div class="container">
@@ -25,11 +48,11 @@ $(document).ready(function() {
             <!-- LOGO -->
             <img class="page-logo" src="./css/images/logo.png" alt="SnackPack Logo" />
             <!-- HOME,ABOUT -->
-            <?php include("partials-frontend/nav-bar.php"); ?>
+            <?php include ("partials-frontend/nav-bar.php"); ?>
             <!-- LOGIN BUTTON -->
             <ul>
                 <li><b>
-                        <?php if (isset($_SESSION["user"])) {
+                        <?php if (isset ($_SESSION["user"])) {
                             ?>
                             <a href="user-panel.php" style="font-size: 25px;color: rgb(0, 217, 0);">
                                 <?php echo $_SESSION['user']; ?>
@@ -55,21 +78,37 @@ $(document).ready(function() {
 <div style="max-width: 1200px; margin: 20px auto; padding: 0 20px; display: flex; justify-content: space-between;">
     <!-- Menu title -->
     <h1 style="font-family: Arial, sans-serif; color: #333; margin-bottom: 20px;">Menu</h1>
-
     <!-- Filter options on the right -->
     <div style="flex: 0 0 200px; margin-left: 20px;">
         <h3 style="font-family: Arial, sans-serif; color: #333; margin-bottom: 10px;">Filter:</h3>
         <select id="filter" style="padding: 8px; border-radius: 5px; font-size: 16px; width: 100%;">
-            <option value="all">All</option>
-            <option value="veg">Vegetarian</option>
-            <option value="non_veg">Non-Vegetarian</option>
-            <option value="drinks">Drinks</option>
+            <option value="All">All</option>
+            <?php
+            $sql = "SELECT * FROM category";
+            $res = mysqli_query($conn, $sql);
+            if ($res == TRUE) {
+                $count = mysqli_num_rows($res);
+                if ($count > 0) {
+                    while ($row = mysqli_fetch_array($res)) {
+                        $ca_id = $row["ca_id"];
+                        $category = $row["category"];
+                        ?>
+                        <option value="<?php echo $category ?>">
+                            <?php echo $category ?>
+                        </option>
+                        <?php
+                    }
+                } else {
+
+                }
+            }
+            ?>
         </select>
     </div>
 </div>
 
 <!-- Menu items in grid type structure -->
-<div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 40px;">
+<div class = "menu-container" style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 40px;">
     <?php
     // Query to fetch menu items from the database
     $query = "SELECT * FROM food ORDER BY ca_id ";
@@ -95,4 +134,4 @@ $(document).ready(function() {
 
 
 
-<?php include("partials-frontend/footer.php"); ?>
+<?php include ("partials-frontend/footer.php"); ?>

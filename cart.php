@@ -1,6 +1,6 @@
-<?php include("partials-frontend/menu.php");
+<?php include ("partials-frontend/menu.php");
 
-if (isset($_SESSION['cart_items'])) {
+if (isset ($_SESSION['cart_items'])) {
     $cartItems = $_SESSION['cart_items'];
 } else {
     $cartItems = array(); // Initialize an empty array if no items are set
@@ -79,11 +79,11 @@ $result = $conn->query($sql);
             <!-- LOGO -->
             <img class="page-logo" src="./css/images/logo.png" alt="SnackPack Logo" />
             <!-- HOME,ABOUT -->
-            <?php include("partials-frontend/nav-bar.php"); ?>
+            <?php include ("partials-frontend/nav-bar.php"); ?>
             <!-- LOGIN BUTTON -->
             <ul>
                 <li><b>
-                        <?php if (isset($_SESSION["user"])) {
+                        <?php if (isset ($_SESSION["user"])) {
                             ?>
                             <a href="user-panel.php" style="font-size: 25px;color: rgb(0, 217, 0);">
                                 <?php echo $_SESSION['user']; ?>
@@ -122,7 +122,7 @@ $result = $conn->query($sql);
         <!-- Loop through cart items -->
         <?php
         $totalPrice = 0; // Initialize total price
-        if (!empty($cartItems)) {
+        if (!empty ($cartItems)) {
             foreach ($cartItems as $key => $item) {
                 // Calculate total price for each item
                 $itemTotal = $item['quantity'] * $item['cost'];
@@ -134,7 +134,7 @@ $result = $conn->query($sql);
                 echo '<td style="padding: 15px; border-bottom: 1px solid #ddd; text-align: left; font-size: 18px;">Rs. ' . $item['cost'] . '</td>';
                 echo '<td style="padding: 15px; border-bottom: 1px solid #ddd; text-align: left; font-size: 18px;">' . $item['quantity'] . '</td>';
                 echo '<td style="padding: 15px; border-bottom: 1px solid #ddd; text-align: left; font-size: 18px;">Rs. ' . $itemTotal . '</td>';
-                echo '<td style="padding: 15px; border-bottom: 1px solid #ddd; text-align: center; font-size: 18px;"><button class="remove-from-cart-btn" data-item-id="' . $key . '" style="background: none; border: none;"><i class="fas fa-times-circle" style="color: red; font-size: 24px;"></i></button></td>'; // Add Remove button with data-item-id attribute
+                echo '<td style="padding: 15px; border-bottom: 1px solid #ddd; text-align: center; font-size: 18px;"><button class="remove-from-cart-btn" data-item-id="' . $key . '" style="background: none; border: none;"><i class="fas fa-times-circle" style="color: red; font-size: 24px;cursor: pointer;"></i></button></td>'; // Add Remove button with data-item-id attribute
                 echo '</tr>';
             }
         } else {
@@ -156,8 +156,8 @@ $result = $conn->query($sql);
     <div class="payment-options" style="text-align: center;">
         <h2 style="margin-bottom: 20px; color: #333;">Select Payment Method:</h2>
 
-        <input type="radio" id="paypal" name="payment_method" value="paypal" style="margin: 0 10px;">
-        <label for="paypal" style="font-weight: bold; color: #333;">E-sewa</label>
+        <input type="radio" id="khalti" name="payment_method" value="khalti" style="margin: 0 10px;">
+        <label for="khalti" style="font-weight: bold; color: #333;">Khalti</label>
 
         <input type="radio" id="cash_on_delivery" name="payment_method" value="cash_on_delivery"
             style="margin: 0 10px;">
@@ -165,65 +165,10 @@ $result = $conn->query($sql);
     </div>
     <br />
     <div id="checkoutButtonContainer" style="text-align: center;">
-        <button id="checkoutButton"
-            style="font-size:20px;padding: 12px 24px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; display: block; margin: 0 auto;">Proceed
-            to Checkout</button>
+        <button id="checkoutButton" class="checkoutButton"
+            style="font-size:20px;padding: 12px 24px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; display: block; margin: 0 auto;">
+            Proceed to Checkout</button>
     </div>
-
-    <script>
-        // Get checkout button and payment method radio buttons
-        var checkoutButton = document.getElementById('checkoutButton');
-        var paymentMethodRadios = document.getElementsByName('payment_method');
-
-        // Add click event listener to checkout button
-        checkoutButton.addEventListener('click', function (event) {
-            var selectedPaymentMethod;
-            // Loop through payment method radio buttons to find the selected one
-            for (var i = 0; i < paymentMethodRadios.length; i++) {
-                if (paymentMethodRadios[i].checked) {
-                    selectedPaymentMethod = paymentMethodRadios[i].value;
-                    break;
-                }
-            }
-            // Check if a payment method is selected
-            if (selectedPaymentMethod) {
-                // Prevent the default action of the button
-                event.preventDefault();
-                // Append selected payment method to the URL and redirect to checkout page
-                var checkoutUrl = "<?php echo SITEURL; ?>checkout.php?payment_method=" + encodeURIComponent(selectedPaymentMethod) + "&total_price=" + encodeURIComponent(<?php echo $totalPrice; ?>);
-
-                $.ajax({
-                    url: 'place-order.php', // Replace with the actual path to add-order.php
-                    type: 'post',
-                    data: {
-                        payment_method: selectedPaymentMethod,
-                        total_price: <?php echo $totalPrice; ?>,
-                        cart_items: <?php echo json_encode($cartItems); ?>, // Assuming $cartItems contains the details of items in the cart
-                        orderstatus: 'pending', // Example order status
-                        food_id: <?php echo $food_id; ?>, // Example food id
-                        amount: <?php echo $totalPrice; ?>, // Example amount
-                        date: '<?php echo date("Y-m-d H:i:s"); ?>', // Current date and time
-                        cus_id: <?php echo $cus_id; ?>, // Example customer id
-                        quantity: <?php echo $quantity; ?>, // Example quantity
-                        custom_status: 'Processing' // Example custom status
-                    },
-                    success: function (response) {
-                        // Redirect to checkout page after successfully adding order
-                        window.location.href = checkoutUrl;
-                    },
-                    error: function (xhr, status, error) {
-                        // Display error message if adding order fails
-                        alert('An error occurred while adding the order');
-                    }
-                });
-
-            } else {
-                // If no payment method is selected, display an alert
-                alert("Please select a payment method");
-            }
-        });
-    </script>
-
 
     <div class="recommendations"
         style="max-width: 800px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
@@ -249,4 +194,48 @@ $result = $conn->query($sql);
     </div>
 </div>
 
-    <?php include("partials-frontend/footer.php"); ?>
+<script>
+    // Get checkout button and payment method radio buttons
+    var checkoutButton = document.getElementById('checkoutButton');
+    var paymentMethodRadios = document.getElementsByName('payment_method');
+
+    // Add click event listener to checkout button
+    $(document).on('click', '.checkoutButton', function () {
+        var selectedPaymentMethod;
+        // Loop through payment method radio buttons to find the selected one
+        for (var i = 0; i < paymentMethodRadios.length; i++) {
+            if (paymentMethodRadios[i].checked) {
+                selectedPaymentMethod = paymentMethodRadios[i].value;
+                break;
+            }
+        }
+        // Check if a payment method is selected
+        if (selectedPaymentMethod) {
+            // Prevent the default action of the button
+            event.preventDefault();
+            // Append selected payment method to the URL and redirect to checkout page
+            var checkoutUrl = "<?php echo SITEURL; ?>checkout.php?payment_method=" + encodeURIComponent(selectedPaymentMethod) + "&total_price=" + encodeURIComponent(<?php echo $totalPrice; ?>);
+
+            // Now, you can use these variables in the AJAX data
+            $.ajax({
+                url: 'place-order.php',
+                type: 'post',
+                data: {
+                    payment_method: selectedPaymentMethod,
+                    total_price: <?php echo json_encode($totalPrice); ?>
+                },
+                success: function (response) {
+                    window.location.href = checkoutUrl;
+                },
+                error: function (xhr, status, error) {
+                    alert('An error occurred while adding the order');
+                }
+            });
+
+        } else {
+            // If no payment method is selected, display an alert
+            alert("Please select a payment method");
+        }
+    });
+</script>
+<?php include ("partials-frontend/footer.php"); ?>
